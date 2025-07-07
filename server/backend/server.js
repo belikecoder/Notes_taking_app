@@ -1,12 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const dotenv = require("dotenv").config();
+require("dotenv").config(); // ✅ Correct way to load .env
 
 const authRoutes = require("./routes/authRoutes");
 const noteRoutes = require("./routes/noteRoutes");
 
-dotenv.config();
 const app = express();
 
 app.use(cors());
