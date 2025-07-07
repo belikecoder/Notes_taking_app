@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
-
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/notesPage.css";
@@ -16,6 +15,8 @@ const NotesPage = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const userString = localStorage.getItem("user");
+
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const user = useMemo(() => {
     try {
@@ -36,7 +37,7 @@ const NotesPage = () => {
     try {
       setIsLoadingNotes(true);
       setError(null);
-      const response = await axios.get("http://localhost:5000/api/notes", {
+      const response = await axios.get(`${API_URL}/api/notes`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotes(response.data);
@@ -46,7 +47,7 @@ const NotesPage = () => {
     } finally {
       setIsLoadingNotes(false);
     }
-  }, [token]);
+  }, [token, API_URL]);
 
   useEffect(() => {
     if (token && user) {
@@ -66,7 +67,7 @@ const NotesPage = () => {
     try {
       setIsAddingNote(true);
       const response = await axios.post(
-        "http://localhost:5000/api/notes",
+        `${API_URL}/api/notes`,
         { content: newNote.trim() },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -85,7 +86,7 @@ const NotesPage = () => {
 
     try {
       setDeletingNoteId(id);
-      await axios.delete(`http://localhost:5000/api/notes/${id}`, {
+      await axios.delete(`${API_URL}/api/notes/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotes((prev) => prev.filter((note) => note._id !== id));
@@ -130,7 +131,13 @@ const NotesPage = () => {
               disabled={isAddingNote}
             />
             <button type="submit" disabled={isAddingNote || !newNote.trim()}>
-              {isAddingNote ? <><span className="spinner small"></span> Creating...</> : "Create Note"}
+              {isAddingNote ? (
+                <>
+                  <span className="spinner small"></span> Creating...
+                </>
+              ) : (
+                "Create Note"
+              )}
             </button>
           </form>
           {addNoteError && <p className="error-message">{addNoteError}</p>}
@@ -159,7 +166,9 @@ const NotesPage = () => {
                       disabled={deletingNoteId === note._id}
                     >
                       {deletingNoteId === note._id ? (
-                        <><span className="spinner tiny"></span> Deleting...</>
+                        <>
+                          <span className="spinner tiny"></span> Deleting...
+                        </>
                       ) : (
                         "Delete"
                       )}
