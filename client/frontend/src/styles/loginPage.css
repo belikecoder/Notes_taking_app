@@ -1,0 +1,361 @@
+/* loginpage.css */
+
+/* General Body and HTML Reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding and border are included in element's total width/height */
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f2f5; /* A slightly cooler, very light grey background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure body takes full viewport height */
+}
+
+/* Auth Page Container */
+.auth-page {
+  display: flex;
+  min-height: 80vh; /* Use min-height to allow content to expand, but ensure a decent starting size */
+  max-height: 90vh; /* Prevent it from being too tall on very large screens */
+  width: 90%; /* Use a percentage for better responsiveness */
+  max-width: 1200px; /* Max width for the whole auth page content */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* More pronounced, softer shadow */
+  border-radius: 20px; /* Slightly more rounded corners for modern feel */
+  overflow: hidden; /* Ensures inner elements respect border-radius */
+  background-color: #ffffff; /* White background for the container */
+}
+
+/* Left Section - Form Container */
+.auth-left {
+  flex: 1;
+  padding: 40px 60px; /* Adjust padding: More vertical, less horizontal if content is constrained */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center content */
+  align-items: center; /* Horizontally center content within auth-left */
+  text-align: center; /* Center text elements like headings and paragraphs */
+}
+
+/* Inner Content Wrapper for Auth Left - Critical for alignment */
+.auth-left-content {
+  max-width: 380px; /* Slightly narrower to fit the design in the image */
+  width: 100%; /* Ensure it takes full width up to max-width */
+  /* Remove flex properties here if auth-left handles the centering */
+  display: flex; /* Added flex to manage internal spacing easily */
+  flex-direction: column;
+  gap: 20px; /* Use gap for consistent spacing between major sections */
+}
+
+.auth-header {
+  margin-bottom: 30px; /* Space between header and form */
+}
+
+/* Headings */
+.auth-left h2 { /* Highway Delite */
+  font-size: 36px; /* Slightly smaller for brand name */
+  margin-bottom: 8px; /* Closer to the h1 "Welcome Back!" */
+  color: #f18101;
+  letter-spacing: -0.8px;
+  font-weight: 700;
+}
+
+.auth-left h1 { /* Welcome Back! */
+  font-size: 38px; /* Main prominent heading */
+  margin-bottom: 10px; /* Space after main heading */
+  color: #2bff00;
+  letter-spacing: -0.8px;
+  font-weight: 700;
+}
+
+
+/* Paragraphs/Descriptions */
+.auth-left p {
+  color: #555;
+  line-height: 1.6;
+  font-size: 16px;
+  margin-bottom: 0; /* Remove default paragraph margin */
+}
+
+/* Form Group (Label + Input) */
+.form-group {
+  text-align: left; /* Align label to the left */
+  margin-bottom: 18px; /* Spacing between form groups */
+  width: 100%;
+}
+
+.form-group label {
+  display: block; /* Make label take full width */
+  margin-bottom: 8px; /* Space between label and input */
+  color: #444;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Input Fields */
+.auth-left input {
+  padding: 12px 15px; /* Adjust padding for better visual balance */
+  font-size: 16px;
+  border: 1px solid #ccc; /* Slightly darker border for better definition */
+  border-radius: 8px; /* Slightly less rounded than before, matching image */
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Inner shadow for depth */
+}
+
+.auth-left input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); /* Soft glow on focus */
+  outline: none;
+  background-color: #fdfefe;
+}
+
+/* Submit Button */
+.primary-button { /* Changed from .auth-left button to use a more generic class */
+  padding: 13px 20px; /* Adjusted padding for better height and text centering */
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px; /* Matching input border-radius */
+  font-weight: 600; /* Slightly less bold than before */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  width: 100%;
+  letter-spacing: 0.5px;
+  font-size: 17px;
+  margin-top: 10px; /* Added margin-top to separate from input */
+}
+
+.primary-button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(37, 99, 235, 0.2);
+}
+
+.primary-button:disabled {
+  background-color: #a8bce7;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: translateY(0);
+  opacity: 0.7; /* Slightly dim it when disabled */
+}
+
+/* Links (e.g., Forgot Password) */
+.switch-link { /* A class for the paragraph containing the link */
+    margin-top: 25px; /* More space above the link paragraph */
+    font-size: 15px;
+    color: #666;
+}
+
+.switch-link a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.switch-link a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: #d32f2f;
+  font-size: 14px;
+  margin-top: -10px; /* Pull it closer to the input */
+  margin-bottom: 15px; /* Space it out from the button */
+  text-align: left;
+  animation: fadeIn 0.3s ease-out;
+  padding-left: 5px; /* Small indentation for readability */
+}
+
+/* Spinner for Button */
+.spinner {
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Right Section - Image/Illustration */
+.auth-right {
+  flex: 1;
+  background: linear-gradient(135deg, #e0f2fe 0%, #cceeff 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px; /* Padding around the image container */
+  position: relative; /* For positioning overlay text */
+}
+
+.auth-right img {
+  width: 90%;
+  max-width: 500px; /* Adjust max-width to control image size */
+  height: auto;
+  object-fit: contain;
+  border-radius: 15px; /* Consistent rounded corners */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  /* Added to prevent image from pushing content out on mobile if image is visible */
+  min-width: 0;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  right: 15%; /* Adjusted right position */
+  transform: translateY(-50%);
+  color: #fffefe; /* Darker text for readability over light background */
+  max-width: 250px; /* Control width of the text block */
+  text-align: right; /* Align text to the right */
+  padding: 20px;
+  /* background-color: rgba(255, 255, 255, 0.8); /* Optional: slight background for text */
+  /* border-radius: 8px; */
+  /* box-shadow: 0 5px 15px rgba(0,0,0,0.08); */
+}
+
+.overlay-text blockquote {
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 0 0 10px 0; /* Adjust margin for blockquote */
+  padding: 0;
+  font-style: italic;
+}
+
+.overlay-text p {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  color: #fdfcfc;
+}
+
+
+/* Media Queries for Responsiveness */
+@media (max-width: 992px) { /* Adjust breakpoint for tablet sizes */
+  .auth-page {
+    flex-direction: column;
+    max-height: unset; /* Remove max-height for mobile */
+    min-height: 100vh; /* Ensure full height on mobile */
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .auth-left {
+    padding: 40px 30px; /* Reduced padding for smaller screens */
+    order: 2; /* Form below image on smaller screens */
+  }
+
+  .auth-right {
+    display: flex; /* Keep image visible on tablet, but adjust sizing */
+    order: 1; /* Image above form */
+    height: 250px; /* Fixed height for image section */
+    padding: 20px;
+    position: relative; /* Ensure position for overlay-text */
+  }
+
+  .auth-right img {
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .overlay-text {
+    top: 50%;
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center text on image for tablet */
+    text-align: center;
+    max-width: 90%;
+    background-color: rgba(255, 255, 255, 0.85); /* Add background for readability */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .overlay-text blockquote {
+    font-size: 16px;
+  }
+
+  .overlay-text p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-right {
+    display: none; /* Hide image completely on small mobile screens */
+  }
+  .auth-left {
+    padding: 30px 20px;
+  }
+  .auth-left-content {
+    gap: 15px; /* Reduce gap on smaller screens */
+  }
+  .auth-left h2 {
+    font-size: 30px;
+  }
+  .auth-left h1 {
+    font-size: 32px;
+  }
+  .auth-left p {
+    font-size: 15px;
+    margin-bottom: 20px; /* Add some margin back for mobile */
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .primary-button {
+    font-size: 16px;
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-left {
+    padding: 25px 15px;
+  }
+  .auth-left h2 {
+    font-size: 26px;
+  }
+  .auth-left h1 {
+    font-size: 28px;
+  }
+  .auth-left p {
+    font-size: 14px;
+  }
+  .form-group label {
+    font-size: 14px;
+  }
+  .auth-left input,
+  .primary-button {
+    font-size: 15px;
+  }
+}
