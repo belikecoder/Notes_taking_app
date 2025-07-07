@@ -1,4 +1,3 @@
-// File: src/pages/SignupPage.js
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -14,6 +13,7 @@ const SignupPage = () => {
   const [formErrors, setFormErrors] = useState({});
 
   const navigate = useNavigate();
+  const API_URL = process.env.REACT_APP_API_URL; // ✅ Use env variable
 
   const validateForm = () => {
     const errors = {};
@@ -52,7 +52,7 @@ const SignupPage = () => {
 
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/signup", {
+      const response = await axios.post(`${API_URL}/api/auth/signup`, {
         username: username.trim(),
         email: email.trim(),
         dateOfBirth: dob,
@@ -66,9 +66,12 @@ const SignupPage = () => {
       }
     } catch (err) {
       console.error("Signup error:", err);
-      if (err.response && err.response.data && err.response.data.message) {
+      if (err.response?.data?.message) {
         if (err.response.data.message.includes("already exists")) {
-          setFormErrors((prev) => ({ ...prev, email: err.response.data.message }));
+          setFormErrors((prev) => ({
+            ...prev,
+            email: err.response.data.message,
+          }));
         } else {
           setGeneralError(err.response.data.message);
         }
@@ -103,7 +106,9 @@ const SignupPage = () => {
                 }}
                 disabled={isLoading}
               />
-              {formErrors.username && <p className="validation-error">{formErrors.username}</p>}
+              {formErrors.username && (
+                <p className="validation-error">{formErrors.username}</p>
+              )}
             </div>
 
             <div className="form-group">
@@ -118,7 +123,9 @@ const SignupPage = () => {
                 }}
                 disabled={isLoading}
               />
-              {formErrors.email && <p className="validation-error">{formErrors.email}</p>}
+              {formErrors.email && (
+                <p className="validation-error">{formErrors.email}</p>
+              )}
             </div>
 
             <div className="form-group">
@@ -133,13 +140,21 @@ const SignupPage = () => {
                 }}
                 disabled={isLoading}
               />
-              {formErrors.dob && <p className="validation-error">{formErrors.dob}</p>}
+              {formErrors.dob && (
+                <p className="validation-error">{formErrors.dob}</p>
+              )}
             </div>
 
             {generalError && <p className="error-message">{generalError}</p>}
 
             <button type="submit" className="primary-button" disabled={isLoading}>
-              {isLoading ? <><span className="spinner"></span> Sending OTP...</> : "Send OTP"}
+              {isLoading ? (
+                <>
+                  <span className="spinner"></span> Sending OTP...
+                </>
+              ) : (
+                "Send OTP"
+              )}
             </button>
           </form>
 
